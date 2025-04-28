@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SafeSight - Emergency Alert System</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    #map {
+      height: 400px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🚨 SafeSight Emergency Alert 🚨</h1>
+
+<div id="map"></div>
+
+<div class="form-group">
+  <label for="description">Problem Description:</label><br>
+  <input type="text" id="description" placeholder="e.g., Accident, Fire, etc." style="width:100%; padding:8px;">
+</div>
+
+<div class="form-group">
+  <label for="video">Upload Video (optional):</label><br>
+  <input type="file" id="video" accept="video/*">
+</div>
+
+<button id="alertButton">Send Emergency Alert</button>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-storage-compat.js"></script>
+
+<!-- Google Maps -->
+<script 
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcj08S6T3nQyR3_z3QaGTow4MAhtYNHx8&callback=initMap"
+  async defer></script>
+
+<script src="app.js"></script>
+
+</body>
+</html>
