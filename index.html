@@ -2,53 +2,76 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SafeSight - Emergency Alert System</title>
-  <link rel="stylesheet" href="style.css">
+  <title>SafeSight Emergency Alert</title>
+
+  <!-- Firebase Libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+  <!-- Google Maps API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcj08S6T3nQyR3_z3QaGTow4MAhtYNHx8&callback=initMap" async defer></script>
+
   <style>
     body {
-      padding: 20px;
       font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 20px;
     }
     #map {
       height: 400px;
       width: 100%;
-      margin-bottom: 20px;
     }
-    .form-group {
-      margin-bottom: 15px;
+    #progress {
+      width: 100%;
+      background-color: #eee;
+      margin-top: 10px;
+    }
+    #progressBar {
+      width: 0%;
+      height: 20px;
+      background-color: #4caf50;
+    }
+    #recaptcha-container {
+      margin-top: 10px;
     }
   </style>
 </head>
+
 <body>
 
-<h1>🚨 SafeSight Emergency Alert 🚨</h1>
+  <h2>🚨 SafeSight Emergency Alert</h2>
 
-<div id="map"></div>
+  <div class="container">
+    <div>
+      <input type="text" id="username" placeholder="Enter your name" /><br><br>
+      <input type="tel" id="phone" placeholder="+91XXXXXXXXXX" />
+      <button onclick="sendOTP()">Send OTP</button>
+      <div id="recaptcha-container"></div>
+      <br><input type="text" id="otp" placeholder="Enter OTP" />
+      <button onclick="verifyOTP()">Verify</button>
 
-<div class="form-group">
-  <label for="description">Problem Description:</label><br>
-  <input type="text" id="description" placeholder="e.g., Accident, Fire, etc." style="width:100%; padding:8px;">
-</div>
+      <br><br><input type="file" id="video" accept="video/*" />
+      <br><br><input type="text" id="description" placeholder="Describe the emergency..." style="width: 90%;" />
 
-<div class="form-group">
-  <label for="video">Upload Video (optional):</label><br>
-  <input type="file" id="video" accept="video/*">
-</div>
+      <br><br>
+      <button id="alertButton" disabled>Send Emergency Alert</button>
+      <button id="resetButton">Reset</button>
 
-<button id="alertButton">Send Emergency Alert</button>
+      <div id="progress">
+        <div id="progressBar"></div>
+      </div>
+    </div>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-storage-compat.js"></script>
+    <div id="map"></div>
+  </div>
 
-<!-- Google Maps -->
-<script 
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcj08S6T3nQyR3_z3QaGTow4MAhtYNHx8&callback=initMap"
-  async defer></script>
-
-<script src="app.js"></script>
+  <script src="app.js"></script>
 
 </body>
 </html>
